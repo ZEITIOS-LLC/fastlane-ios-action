@@ -45,6 +45,9 @@ inputs:
   match-password:
     description: 'Password to encrypt/decrypt certificates using match'
     required: true
+  match-git-basic-auth:
+    description: 'Match Git Basic Auth'
+    required: true
 runs:
   using: 'composite'
   steps:
@@ -72,6 +75,7 @@ runs:
       shell: bash
       run: bundle exec fastlane ios release
       env:
+        MATCH_GIT_BASIC_AUTHORIZATION: ${{ inputs.match-git-basic-auth }}
         MATCH_PASSWORD: ${{ inputs.match-password }}
         APP_BUILD_NUMBER: ${{ inputs.build-number }}
         APP_BUILD_NAME: ${{ inputs.build-name }}
