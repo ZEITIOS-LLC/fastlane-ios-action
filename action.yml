@@ -76,7 +76,6 @@ runs:
         TEAM_ID: ${{ inputs.team-id }}
         ITC_TEAM_ID: ${{ inputs.itc-team-id }}
         IOS_SCHEME: ${{ inputs.scheme }}
-        IOS_CONFIGURATION: ${{ inputs.configuration }}
         XCODE_PROJ: ${{ inputs.xcodeproj }}
         XCODE_WORKSPACE: ${{ inputs.xcworkspace }}
         APPLE_KEY_ID: ${{ inputs.apple-key-id }}
