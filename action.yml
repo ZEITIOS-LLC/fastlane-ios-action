@@ -56,13 +56,29 @@ runs:
       with:
         ruby-version: '3.1.2'
         bundler-cache: true
+    - name: Check if Flutter app
+      id: flutter-check
+      run: |
+        if [ -f "pubspec.yaml" ]; then
+          if grep -q "flutter:" pubspec.yaml; then
+            echo "::set-output name=is_flutter::true"
+          fi
+        fi
+      shell: bash
     - uses: actions/setup-node@v2
       with:
         node-version: '16'
-    - name: Install dependencies
+    - name: Install React Native dependencies
+      if: steps.flutter-check.outputs.is_flutter == 'false'
       shell: bash
       run: |
-          yarn
+        yarn
+    - uses: subosito/flutter-action@v2
+    - name: Install Flutter dependencies
+      if: steps.flutter-check.outputs.is_flutter == 'true'
+      shell: bash
+      run: |
+        flutter pub get
     - id: create-apple-key-file
       if: ${{ inputs.apple-key-base64 != '' }}
       shell: bash
