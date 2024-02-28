@@ -86,7 +86,6 @@ runs:
       if: steps.flutter-check.outputs.is_flutter == 'true'
       run: |
         flutter pub get
-        flutter build appbundle
       shell: bash
     - id: create-apple-key-file
       if: ${{ inputs.apple-key-base64 != '' }}
